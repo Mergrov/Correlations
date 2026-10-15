@@ -125,6 +125,75 @@ STOXX_Global_Secelt_div_100_full = {
      "ENTERGY CORP" : "ETR"
 }
 
+Gloabl_water = {
+    "AMERICAN WATER WORKS": "AWK",
+    "XYLEM INC": "XYL",
+    "COMPANHIA DE SANEAMENTO BASICO DE": "SBSP3.SA",
+    "ESSENTIAL UTILITIES INC": "WTRG",
+    "UNITED UTILITIES GROUP PLC": "UU.L",
+    "SEVERN TRENT PLC": "SVT.L",
+    "VERALTO CORP": "VLTO",
+    "ECOLAB": "ECL",
+    "ADVANCED DRAINAGE SYSTEMS INC": "WMS",
+    "WATTS WATER TECHNOLOGIES CLASS A": "WTS",
+    "GEBERIT AG": "GEBN.SW",
+    "ZURN ELKAY WATER SOLUTIONS CORP": "ZWS",
+    "AMERICAN STATES WATER": "AWR",
+    "CORE & MAIN INC CLASS A": "CNM",
+    "CALIFORNIA WATER SERVICE GROUP": "CWT",
+    "KURITA WATER INDUSTRIES": "6370.T",
+    "PENTAIR": "PNR",
+    "COMPANHIA DE SANEAMENTO DE MINAS G": "CSMG3.SA",
+    "BELIMO N AG": "BEAN.SW",
+    "PENNON GROUP PLC": "PNN.L",
+    "H2O AMERICA": "HTO",
+    "SELECT WATER SOLUTIONS CLASS A": "WTTR",
+    "FRANKLIN ELECTRIC": "FELE",
+    "MUELLER WATER PRODUCTS SERIES A": "MWA",
+    "BADGER METER": "BMI",
+    "AALBERTS": "AALB.AS",
+    "YTL POWER INTERNATIONAL": "YTLPOWR.KL",
+    "CIA SANEAMENTO DO PARANA UNITS": "SAPR11.SA",
+    "GEORG FISCHER AG": "GF.SW",
+    "ORGANO CORP": "6368.T",
+    "MIDDLESEX WATER": "MSEX",
+    "VA TECH WABAG": "WABAG.NS",
+    "BEIJING ENTERPRISES WATER GROUP LT": "0371.HK",
+    "COWAY LTD": "021240.KS",
+    "INTERPUMP GROUP": "IP.MI",
+    "GORMAN-RUPP": "GRC",
+    "SULZER AG LTD": "SUN.SW",
+    "ASTRAL": "ASTRAL.NS",
+    "HAWKINS INC": "HWKN",
+    "WIENERBERGER AG": "WIE.VI",
+    "SUPREME INDUSTRIES LTD": "SUPREMEIND.NS",
+    "LINDSAY": "LNN",
+    "KEMIRA": "KEMIRA.HE",
+    "TETRA TECHNOLOGIES": "TTI",
+    "NWPX INFRASTRUCTURE INC": "NWPX",
+    "PILLAR CORP": "6490.T",
+    "KITZ CORP": "6498.T",
+    "CONSOLIDATED WATER LTD": "CWCO",
+    "POWER AND WATER UTILITY COMPANY FO": "2083.SR",
+    "NOMURA MICRO SCIENCE LTD": "6254.T",
+    "ALKHORAYEF WATER & POWER TECHNOLOG": "2081.SR",
+    "TSUKISHIMA HOLDINGS LTD": "6332.T",
+    "ONTERRIS INC": "ONT",
+    "AMATA CORPORATION NON-VOTING DR PC": "AMATA.BK",
+    "CHENGDU XINGRONG ENVIRONMENT LTD A": "000598.SZ",
+    "ENERGY RECOVERY": "ERII",
+    "CADIZ INC": "CDZI",
+    "ZHONGSHAN PUBLIC UTILITIES GROUP L": "000685.SZ",
+    "KUO TOONG INTERNATIONAL LTD": "8936.TWO",
+    "BEIJING CAPITAL ECO-ENVIRONMENT PR": "600008.SS",
+    "JINDAL SAW LTD": "JINDALSAW.NS",
+    "BEIJING ORIGINWATER TECHNOLOGY LTD": "300070.SZ",
+    "KURIMOTO LTD": "5602.T",
+    "CHINA LESSO GROUP HOLDINGS LTD": "2128.HK",
+    "JIANGXI HONGCHENG ENVIRONMENT  LTD": "600461.SS",
+    "JINGJIN EQUIPMENT INC A": "603279.SS",
+}
+
 Portfolio = {
 
     "Cyber_Folks":"CBF.WA",
@@ -140,7 +209,7 @@ Portfolio = {
 }
 
 # --- KONFIGURACJA ---
-tickers = {**STOXX_Global_Secelt_div_100_full, **Portfolio}
+tickers = {**STOXX_Global_Secelt_div_100_full, **Gloabl_water, **Portfolio}
 
 period = "5y"
 output_dir = "Correlations"
@@ -316,7 +385,9 @@ correlation_pairs = pd.concat(
 
 with get_connection() as conn:
     initialize_database(conn)
-    seed_initial_instruments(conn, [DB_STOXX_INSTRUMENTS, DB_PORTFOLIO])
+    seed_initial_instruments(
+        conn, [DB_STOXX_INSTRUMENTS, DB_PORTFOLIO, Gloabl_water]
+    )
     data_source_id = ensure_data_source(
         conn, "Yahoo Finance", "https://finance.yahoo.com"
     )

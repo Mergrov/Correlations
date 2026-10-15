@@ -362,6 +362,17 @@ def infer_listing(ticker: str) -> tuple[str, str]:
         ".TO": ("TSX", "CAD"),
         ".SW": ("SIX", "CHF"),
         ".NZ": ("NZX", "NZD"),
+        ".SA": ("B3", "BRL"),
+        ".KS": ("KRX", "KRW"),
+        ".NS": ("NSE", "INR"),
+        ".KL": ("BURSA_MALAYSIA", "MYR"),
+        ".SS": ("SSE", "CNY"),
+        ".SZ": ("SZSE", "CNY"),
+        ".BK": ("SET", "THB"),
+        ".SR": ("TADAWUL", "SAR"),
+        ".TWO": ("TPEX", "TWD"),
+        ".HE": ("NASDAQ_HELSINKI", "EUR"),
+        ".VI": ("VIENNA", "EUR"),
     }
     for suffix, listing in suffix_listings.items():
         if ticker.endswith(suffix):
